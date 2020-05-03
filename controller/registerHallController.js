@@ -111,7 +111,7 @@ router.get("/", (req, res) => {
         }
       })
   });
-  router.get("/hallDetails/:id", async(req, res) => {
+  router.get("/hallDetails/:id", async(req, res) => { 
     await RegisterHall.findOne({_id:req.params.id})
       .exec()
       .then(user => {
@@ -126,5 +126,17 @@ router.get("/", (req, res) => {
         console.log(err)
       });
   });
-  
+  router.get("/:id", (req, res) => {
+    RegisterHall.find({ userAccount: req.params.id })
+      .exec()
+      .then(user => {
+        if (user.length < 1) {
+          return res.status(404).json({
+            message: "No Venuew Registered"
+          });
+        } else {
+          res.send(user);
+        }
+      });
+  });
 module.exports=router;

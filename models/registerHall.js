@@ -1,6 +1,11 @@
 const mongoose =  require('mongoose')
 
 var  registerHallSchema = mongoose.Schema({
+    userAccount: {
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: "userAccount",
+        required:true 
+      },
     name: String,
     email:String,
     location:String,
@@ -10,6 +15,7 @@ var  registerHallSchema = mongoose.Schema({
     services : [ 
            
              ],
+            
     mainImage:String,
 //     gallary : [ {
 //    gallary:String

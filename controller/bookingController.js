@@ -16,12 +16,13 @@ router.post("/", async(req, res, next) => {
       const booking = new Booking({
    
         _id: new mongoose.Types.ObjectId(),
-        date:req.body.date,
-        timing: req.body.timing,
         name:req.body.name,
-        guests:req.body.guests,
-        eventType:req.body.eventType,
+        email:req.body.email,
         phone:req.body.phone,
+        guests:req.body.guests,
+        date:req.body.date,
+        eventType:req.body.eventType,
+      city:req.body.city,
         registerHall:req.body.registerHallId,
       });
       return booking.save();
