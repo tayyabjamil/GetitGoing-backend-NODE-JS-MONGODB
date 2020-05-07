@@ -12,6 +12,8 @@ var  registerHallSchema = mongoose.Schema({
     startBookingAmount:String,
     about:String,
     contact:String,
+    mainImage:String,
+    vedio:String,
     services : [ 
            
              ],

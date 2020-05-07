@@ -47,13 +47,19 @@ router.post("/signUp", (req, res) => {
                 message: "user not found"
               });
             } else {
-            
+              if(user[0].password !== req.body.password){
+                return res.status(200).json({
+                  message: "wrong password "
+                });
+                  
+              }
+            }
           console.log('login');
           userId = user[0].id;
           res.status(200).send({  userId });
-        }
           })
-        })
+          })
+          
         router.get("/", (req, res) => {
           userAccount.find((err, docs) => {
             if (!err) {

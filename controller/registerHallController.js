@@ -61,7 +61,8 @@ const fileimageFilter = (req, file, cb) => {
           about: req.body.about,
           contact: req.body.contact,
           services: req.body.services,
-          mainImage:req.file,
+          mainImage:req.body.mainImage,
+          vedio:req.body.vedio,
           userAccount: req.body.userAccountId
         });
         return registerHall.save();
@@ -99,7 +100,7 @@ const fileimageFilter = (req, file, cb) => {
 
 // })
 router.get("/", (req, res) => {
-    RegisterHall.find().select('name startBookingAmount location')
+    RegisterHall.find().select('name startBookingAmount location mainImage')
       .exec()
       .then(user => {
         if (user.length < 1) {
