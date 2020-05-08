@@ -5,6 +5,8 @@ var bookingController = require('./controller/bookingController')
 
 var userAccountController = require('./controller/userAccountController');
 var registerHallController = require('./controller/registerHallController');
+var registerCarController = require('./controller/registerCarController');
+var bookingCarController = require('./controller/bookingCarController');
 const app = express();
 
 
@@ -21,5 +23,6 @@ app.use(express.static('uploads'));
 app.use('/userAccount', userAccountController);
 app.use('/booking',bookingController)
 app.use('/registerHall',registerHallController)
-
+app.use('/registerCar',registerCarController)
+app.use('/bookingCar',bookingCarController)
 module.exports=app;

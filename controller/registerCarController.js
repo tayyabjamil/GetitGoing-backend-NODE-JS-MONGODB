@@ -3,7 +3,7 @@ const express = require ('express')
 var router =express.Router();
 const multer = require("multer");
 var path = require("path");
-const RegisterHall = require("../models/registerHall")
+const RegisterCar = require("../models/registerCar")
 const UserAccount = require("../models/userAccount");
 
 const fileimageFilter = (req, file, cb) => {
@@ -40,16 +40,7 @@ const fileimageFilter = (req, file, cb) => {
     },
     fileFilter: fileimageFilter
   });
-  router.post('/multipleFiles', upload.array('files'), (req, res, next) => {
-    const files = req.files;
-    console.log(files);
-    if (!files) {
-      const error = new Error('No File')
-      error.httpStatusCode = 400
-      return next(error)
-    }
-      res.send({sttus:  'ok'});
-  })
+
   router.post("/",upload.single('mainImage'), (req, res, next) => {
 
  
@@ -61,25 +52,24 @@ const fileimageFilter = (req, file, cb) => {
             message: "Account not found"
           });
         }
-        const registerHall = new RegisterHall({
+        const registerCar = new RegisterCar({
           _id: new mongoose.Types.ObjectId(),
           name: req.body.name,
-          email:req.body.email,
+          amount:req.body.amount,
           location: req.body.location,
-          startBookingAmount: req.body.startBookingAmount,
           about: req.body.about,
           contact: req.body.contact,
-          services: req.body.services,
+          date:req.body.date,
           mainImage:req.body.mainImage,
           multipleImages:req.body.multipleImages,
           userAccount: req.body.userAccountId
         });
-        return registerHall.save();
+        return registerCar.save();
       })
-      .then(registerHall => {
-        res.send(registerHall);
+      .then(registerCar => {
+        res.send(registerCar);
         res.status(201).json({
-          message: "HALL Registered "
+          message: "CAR Registered "
         });
       })
       .catch(err => {
@@ -89,54 +79,9 @@ const fileimageFilter = (req, file, cb) => {
         });
       });
   });
-  
-// router.post("/:registerHallId/venueImages", uploadImage.single('mainImage'),async (req, res) => {
-//   //find User Account
-//   const registerHall = await registerHall.findOne({ _id: req.params.registerHallId});
 
-//   // // // Start new Campaign
-//   const venue = new venue();
-
-//   venue.title = req.body.title,
-//     venue.tagline = req.body.tagline,
-//     // venue.image= req.file.path,
-//     venue.amount = req.body.amount,
-//     venue.description = req.body.description;
-//     venue.pledgeAmount = req.body.pledgeAmount,
-//     venue.rewardDetails = req.body.rewardDetails;
-//     venue.mainImage = req.file.filename;
-    
-
-//   venue.registerHall = registerHall._id;
-//   await venue.save();
-
-//   // // //associate registerHall with course
-//   registerHall.venues.push(venue._id);
-//   await registerHall.save();
-
-//   res.send(venue);
-// });
-// router.post('/',(req,res)=>{
-// var registerHallData = new RegisterHall({
-//     name:req.body.name,
-//     location: req.body.location,
-//     booking:req.body.booking
-  
-  
-// })
-// registerHallData.
-// save((error, registerHallData) => {
-//     if (error) {
-//       console.log(error);
-//     } else {
-//       res.status(200).send({registerHallData});
- 
-//     }
-//   });
-
-// })
 router.get("/", (req, res) => {
-    RegisterHall.find().select('name startBookingAmount location mainImage')
+    RegisterCar.find().select('name amount location mainImage')
       .exec()
       .then(user => {
         if (user.length < 1) {
@@ -148,8 +93,8 @@ router.get("/", (req, res) => {
         }
       })
   });
-  router.get("/hallDetails/:id", async(req, res) => { 
-    await RegisterHall.findOne({_id:req.params.id})
+  router.get("/carDetails/:id", async(req, res) => { 
+    await RegisterCar.findOne({_id:req.params.id})
       .exec()
       .then(user => {
         if (user.length < 1) {
@@ -164,7 +109,7 @@ router.get("/", (req, res) => {
       });
   });
   router.get("/:id", (req, res) => {
-    RegisterHall.find({ userAccount: req.params.id })
+    RegisterCar.find({ userAccount: req.params.id })
       .exec()
       .then(user => {
         if (user.length < 1) {

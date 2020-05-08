@@ -1,26 +1,22 @@
 const mongoose =  require('mongoose')
 
-var  registerHallSchema = mongoose.Schema({
+var  registerCarSchema = mongoose.Schema({
     userAccount: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: "userAccount",
         required:true 
       },
     name: String,
-    email:String,
+    amount:String,
     location:String,
-    startBookingAmount:String,
     about:String,
     contact:String,
+    date:String,
     mainImage:String,
-
     multipleImages:[],
-    services : [ 
-           
-             ],
-            
-    mainImage:String,
-    gallary : []
+//     gallary : [ {
+//    gallary:String
+//     } ]
     
 })
-module.exports = mongoose.model('registerHall',registerHallSchema)
+module.exports = mongoose.model('registerCar',registerCarSchema)
