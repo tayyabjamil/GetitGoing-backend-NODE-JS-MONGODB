@@ -4,7 +4,7 @@ var  registerHallSchema = mongoose.Schema({
     userAccount: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: "userAccount",
-        required:true 
+     
       },
     name: String,
     email:String,

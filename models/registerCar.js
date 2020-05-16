@@ -4,7 +4,7 @@ var  registerCarSchema = mongoose.Schema({
     userAccount: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: "userAccount",
-        required:true 
+
       },
     name: String,
     amount:String,

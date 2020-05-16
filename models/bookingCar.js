@@ -12,7 +12,7 @@ var  bookingCarSchema = mongoose.Schema({
    registerCar:{
     type:mongoose.Schema.Types.ObjectId,
     ref:'registerCar',
-    required:true 
+ 
 },
 })
 module.exports = mongoose.model('bookingCar',bookingCarSchema)
